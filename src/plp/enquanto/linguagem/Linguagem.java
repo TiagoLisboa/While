@@ -285,6 +285,28 @@ public interface Linguagem {
 			return esq.getValor() <= dir.getValor();
 		}
 	}
+	
+	public class ExpMaiorIgual extends ExpRel {
+		public ExpMaiorIgual(Expressao esq, Expressao dir) {
+			super(esq, dir);
+		}
+
+		@Override
+		public boolean getValor() {
+			return esq.getValor() >= dir.getValor();
+		}
+	}
+	
+	public class ExpDiferente extends ExpRel {
+		public ExpDiferente(Expressao esq, Expressao dir) {
+			super(esq, dir);
+		}
+
+		@Override
+		public boolean getValor() {
+			return esq.getValor() != dir.getValor();
+		}
+	}
 
 	public class NaoLogico implements Bool {
 		private Bool b;
@@ -311,6 +333,36 @@ public interface Linguagem {
 		@Override
 		public boolean getValor() {
 			return esq.getValor() && dir.getValor();
+		}
+	}
+	
+	public class OrLogico implements Bool {
+		private Bool esq;
+		private Bool dir;
+
+		public OrLogico(Bool esq, Bool dir) {
+			this.esq = esq;
+			this.dir = dir;
+		}
+
+		@Override
+		public boolean getValor() {
+			return esq.getValor() || dir.getValor();
+		}
+	}
+	
+	public class XorLogico implements Bool {
+		private Bool esq;
+		private Bool dir;
+
+		public XorLogico(Bool esq, Bool dir) {
+			this.esq = esq;
+			this.dir = dir;
+		}
+
+		@Override
+		public boolean getValor() {
+			return esq.getValor() || dir.getValor() && !(esq.getValor() && dir.getValor());
 		}
 	}
 }

@@ -4,13 +4,14 @@ programa : seqComando;     // sequência de comandos
 
 seqComando: comando (';' comando)* ;
 
-comando: ID ':=' expressao                          # atribuicao
-       | 'skip'                                     # skip
-       | 'se' bool 'entao' comando 'senao' comando  # se
-       | 'enquanto' bool 'faca' comando             # enquanto
-       | 'exiba' Texto                              # exiba
-       | 'escreva' expressao                        # escreva
-       | '{' seqComando '}'                         # bloco
+comando: ID ':=' expressao                          									# atribuicao
+       | 'skip'                                     									# skip
+       | 'se' bool 'entao' comando 'senao' comando  									# se
+       | 'enquanto' bool 'faca' comando             									# enquanto
+       | 'exiba' Texto                              									# exiba
+       | 'escreva' expressao                        									# escreva
+       | '{' seqComando '}'                         									# bloco
+       | 'para' ID 'de' expressao 'ate' expressao 'faca' comando			# enquanto
        ;
 
 expressao: INT                                      # inteiro
@@ -27,8 +28,12 @@ expressao: INT                                      # inteiro
 bool: ('verdadeiro'|'falso')                        # booleano
     | expressao '=' expressao                       # opRel
     | expressao '<=' expressao                      # opRel
+    | expressao '>=' expressao                      # opRel
+    | expressao '<>' expressao                      # opRel
     | 'nao' bool                                    # naoLogico
     | bool 'e' bool                                 # eLogico
+	| bool 'or' bool                                # orLogico
+	| bool 'xor' bool                               # xorLogico
     | '(' bool ')'                                  # boolPar
     ;
 
