@@ -99,6 +99,39 @@ public interface Linguagem {
 			}
 		}
 	}
+	
+	class Para implements Comando {
+		private Id id;
+		private Expressao esq;
+		private Expressao dir;
+		private Comando faca;
+		private Inteiro passo;
+		
+
+		public Para(Id id, Expressao esq, Expressao dir, Comando faca) {
+			this.id = id;
+			this.esq = esq;
+			this.dir = dir;
+			this.faca = faca;
+			this.passo = new Inteiro(1);
+		}
+		
+		public Para(Id id, Expressao esq, Expressao dir, Comando faca, Inteiro passo) {
+			this.id = id;
+			this.esq = esq;
+			this.dir = dir;
+			this.faca = faca;
+			this.passo = passo;
+		}
+
+		@Override
+		public void execute() {
+			for (int i = esq.getValor(); i <= dir.getValor(); i+=passo.getValor()) {
+				id = new Id("" + i);
+				faca.execute();
+			}
+		}
+	}
 
 	class Exiba implements Comando {
 		public Exiba(String texto) {

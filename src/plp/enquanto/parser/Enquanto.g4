@@ -11,7 +11,8 @@ comando: ID ':=' expressao                          									# atribuicao
        | 'exiba' Texto                              									# exiba
        | 'escreva' expressao                        									# escreva
        | '{' seqComando '}'                         									# bloco
-       | 'para' ID 'de' expressao 'ate' expressao 'faca' comando			# enquanto
+       | 'para' ID 'de' expressao 'ate' expressao 'passo' INT 'faca' comando			# paraComPasso
+       | 'para' ID 'de' expressao 'ate' expressao 'faca' comando						# para
        ;
 
 expressao: INT                                      # inteiro
