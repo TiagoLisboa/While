@@ -107,15 +107,6 @@ public interface Linguagem {
 		private Comando faca;
 		private Inteiro passo;
 		
-
-		public Para(Id id, Expressao esq, Expressao dir, Comando faca) {
-			this.id = id;
-			this.esq = esq;
-			this.dir = dir;
-			this.faca = faca;
-			this.passo = new Inteiro(1);
-		}
-		
 		public Para(Id id, Expressao esq, Expressao dir, Comando faca, Inteiro passo) {
 			this.id = id;
 			this.esq = esq;
@@ -126,8 +117,8 @@ public interface Linguagem {
 
 		@Override
 		public void execute() {
-			for (int i = esq.getValor(); i <= dir.getValor(); i+=passo.getValor()) {
-				id = new Id("" + i);
+			for (int i = esq.getValor(); i <= dir.getValor(); i+=(int) passo.getValor()) {
+				ambiente.put(id.id, i);
 				faca.execute();
 			}
 		}
