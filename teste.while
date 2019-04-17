@@ -1,12 +1,9 @@
-a := 2;
+a := 1;
 
-se a = 1 entao
-	escreva 1
-senaose a = 2 entao
-	escreva 2
-senaose a = 3 entao
-	escreva 3
-senao
-	escreva 4
+escolha a
+	  caso 1 : exiba "um"
+      caso 2 : exiba "dois"
+      outro  : exiba "outro numero"
+ 
 	
 	
