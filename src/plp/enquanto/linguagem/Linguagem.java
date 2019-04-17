@@ -1,9 +1,13 @@
 package plp.enquanto.linguagem;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+
+import plp.enquanto.linguagem.Linguagem.Bool;
+import plp.enquanto.linguagem.Linguagem.Comando;
 
 public interface Linguagem {
 	final Map<String, Integer> ambiente = new HashMap<>();
@@ -47,19 +51,31 @@ public interface Linguagem {
 		private Bool condicao;
 		private Comando entao;
 		private Comando senao;
+		private Map<Bool, Comando> senaoses;
 
-		public Se(Bool condicao, Comando entao, Comando senao) {
+		public Se(Bool condicao, Comando entao, Map<Bool, Comando> senaoses, Comando senao) {
 			this.condicao = condicao;
 			this.entao = entao;
 			this.senao = senao;
+			this.senaoses = senaoses;
 		}
 
 		@Override
 		public void execute() {
-			if (condicao.getValor())
+			if (condicao.getValor()) {
 				entao.execute();
-			else
+			} else {
+				Iterator<Bool> condicoes = senaoses.keySet().iterator();
+				while (condicoes.hasNext()) {
+					Bool senaose_condicao = condicoes.next();
+					if (senaose_condicao.getValor()) {
+						senaoses.get(senaose_condicao).execute();
+						return;
+					}
+				}
+				
 				senao.execute();
+			}
 		}
 	}
 
