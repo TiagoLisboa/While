@@ -477,7 +477,7 @@ public interface Linguagem {
 
 		@Override
 		public boolean getValor() {
-			return esq.getValor() || dir.getValor() && !(esq.getValor() && dir.getValor());
+			return esq.getValor() ^ dir.getValor();
 		}
 	}
 }
